@@ -41,7 +41,7 @@ module.exports = {
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-function-return-type": ["off"],
         "@typescript-eslint/no-unused-vars": [
-            "error"
+            "warn"
         ],
         "@typescript-eslint/explicit-module-boundary-types": [
             "warn",
@@ -54,7 +54,7 @@ module.exports = {
         "class-methods-use-this": "off",
         "import/extensions": "off",
         "import/order": [
-            "error",
+            "warn",
             { "newlines-between": "always-and-inside-groups" },
         ],
         "import/no-extraneous-dependencies": [
