@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import {
+    createSlice,
+    PayloadAction
+} from "@reduxjs/toolkit"
 
 import { Coords, GameState, Tile } from "./gameTypes"
 
@@ -15,10 +18,13 @@ export const gameSlice = createSlice({
         openTile: (state, action: PayloadAction<Coords>) => {
             state.tiles[action.payload.x][action.payload.y] = true
         },
+        closeTile: (state, action: PayloadAction<Coords>) => {
+            state.tiles[action.payload.x][action.payload.y] = false
+        },
     }
 })
 
-export const { openTile } = gameSlice.actions
+export const { openTile, closeTile } = gameSlice.actions
 
 export const selectTiles = (state: RootState): Tile[][] => state.game.tiles
 

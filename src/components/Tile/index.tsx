@@ -1,7 +1,7 @@
 import React from "react"
 
 import { useAppDispatch } from "~/store"
-import { openTile } from "~/store/game/gameSlice"
+import { openAndCloseTile } from "~/store/game/gameThunks"
 import { Coords } from "~/store/game/gameTypes"
 
 interface Props {
@@ -16,7 +16,7 @@ const Tile: React.FC<Props> = ({
     const dispatch = useAppDispatch()
 
     const onClickTile = () => {
-        dispatch(openTile(coordinates))
+        dispatch(openAndCloseTile(coordinates))
     }
 
     return (
