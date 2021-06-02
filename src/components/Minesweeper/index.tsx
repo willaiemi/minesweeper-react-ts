@@ -1,10 +1,12 @@
 import React from "react"
 
-import Tile from "../Tile"
-
-const tileGrid = Array.from(Array(16)).map(() => Array.from(Array(16)))
+import Tile from "~/components/Tile"
+import { useAppSelector } from "~/store"
+import { selectTiles } from "~/store/game/gameSlice"
 
 const Minesweeper: React.FC = () => {
+    const tileGrid = useAppSelector(selectTiles)
+
     return (
         <div
             style={{
@@ -30,15 +32,19 @@ const Minesweeper: React.FC = () => {
                         flexDirection: "column"
                     }}
                 >
-                    {tileGrid.map((tiles, i) => (
+                    {tileGrid.map((tiles: boolean[], x) => (
                         <div
-                            key={i}
+                            key={x}
                             style={{
                                 display: "flex",
                             }}
                         >
-                            {tiles.map((_, i) => (
-                                <Tile key={i} />
+                            {tiles.map((tile, y) => (
+                                <Tile
+                                    key={`${x}:${y}`}
+                                    isOpen={tile}
+                                    coordinates={{ x, y }}
+                                />
                             ))}
                         </div>
                     ))}

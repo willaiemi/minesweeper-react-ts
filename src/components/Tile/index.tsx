@@ -1,9 +1,23 @@
-import React, { useState } from "react"
+import React from "react"
 
-const Tile: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false)
+import { useAppDispatch } from "~/store"
+import { openTile } from "~/store/game/gameSlice"
+import { Coords } from "~/store/game/gameTypes"
 
-    const openTile = () => setIsOpen(true)
+interface Props {
+    isOpen: boolean,
+    coordinates: Coords,
+}
+
+const Tile: React.FC<Props> = ({
+    isOpen,
+    coordinates,
+}) => {
+    const dispatch = useAppDispatch()
+
+    const onClickTile = () => {
+        dispatch(openTile(coordinates))
+    }
 
     return (
         <div
@@ -19,7 +33,7 @@ const Tile: React.FC = () => {
                 cursor: "pointer",
                 transition: "0.4s",
             }}
-            onClick={openTile}
+            onClick={onClickTile}
         >
             {isOpen && "1"}
         </div>
