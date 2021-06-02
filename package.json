@@ -67,5 +67,10 @@
     "eslint-plugin-react-hooks": "4.0.8",
     "eslint-plugin-standard": "4.0.1",
     "react-app-rewired": "^2.1.8"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "~/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }
