@@ -1,6 +1,6 @@
 import React from "react"
 
-import Cell from "../Cell"
+import Tile from "../Tile"
 
 const tileGrid = Array.from(Array(16)).map(() => Array.from(Array(16)))
 
@@ -30,15 +30,15 @@ const Minesweeper: React.FC = () => {
                         flexDirection: "column"
                     }}
                 >
-                    {tileGrid.map((cells, i) => (
+                    {tileGrid.map((tiles, i) => (
                         <div
                             key={i}
                             style={{
                                 display: "flex",
                             }}
                         >
-                            {cells.map((_, i) => (
-                                <Cell key={i} />
+                            {tiles.map((_, i) => (
+                                <Tile key={i} />
                             ))}
                         </div>
                     ))}

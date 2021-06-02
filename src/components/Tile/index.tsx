@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 
-const Cell: React.FC = () => {
+const Tile: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false)
 
-    const openCell = () => setIsOpen(true)
+    const openTile = () => setIsOpen(true)
 
     return (
         <div
@@ -19,11 +19,11 @@ const Cell: React.FC = () => {
                 cursor: "pointer",
                 transition: "0.4s",
             }}
-            onClick={openCell}
+            onClick={openTile}
         >
             {isOpen && "1"}
         </div>
     )
 }
 
-export default Cell
+export default Tile
