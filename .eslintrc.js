@@ -38,11 +38,10 @@ module.exports = {
                 enforceForRenamedProperties: false,
             },
         ],
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/explicit-function-return-type": ["off"],
-        "@typescript-eslint/no-unused-vars": [
-            "warn"
-        ],
         "@typescript-eslint/explicit-module-boundary-types": [
             "warn",
             {
