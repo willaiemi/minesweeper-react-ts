@@ -1,22 +1,39 @@
 import React from "react"
 
 import { useAppDispatch } from "~/store"
-import { openAndCloseTile } from "~/store/game/gameThunks"
-import { Coords } from "~/store/game/gameTypes"
+import { openTileHandler } from "~/store/game/gameThunks"
+import { ITile, TileNature } from "~/store/game/gameTypes"
 
 interface Props {
-    isOpen: boolean,
-    coordinates: Coords,
+    tileData: ITile,
+}
+
+const getValueByNature = (nature: TileNature) => {
+    switch (nature) {
+        case TileNature.EMPTY:
+            return ""
+        case TileNature.ONE:
+        case TileNature.TWO:
+        case TileNature.THREE:
+        case TileNature.FOUR:
+        case TileNature.FIVE:
+        case TileNature.SIX:
+        case TileNature.SEVEN:
+        case TileNature.EIGHT:
+        case TileNature.NINE:
+            return nature
+        case TileNature.BOMB:
+            return "💣"
+    }
 }
 
 const Tile: React.FC<Props> = ({
-    isOpen,
-    coordinates,
+    tileData,
 }) => {
     const dispatch = useAppDispatch()
 
     const onClickTile = () => {
-        dispatch(openAndCloseTile(coordinates))
+        dispatch(openTileHandler(tileData))
     }
 
     return (
@@ -29,13 +46,13 @@ const Tile: React.FC<Props> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                background: isOpen ? "white" : "black",
+                background: tileData.isOpen ? "white" : "black",
                 cursor: "pointer",
                 transition: "0.4s",
             }}
             onClick={onClickTile}
         >
-            {isOpen && "1"}
+            {tileData.isOpen && getValueByNature(tileData.nature)}
         </div>
     )
 }

@@ -1,11 +1,16 @@
 import React from "react"
 
 import Tile from "~/components/Tile"
-import { useAppSelector } from "~/store"
-import { selectTiles } from "~/store/game/gameSlice"
+import { useAppDispatch, useAppSelector } from "~/store"
+import { start, selectTiles } from "~/store/game/gameSlice"
 
 const Minesweeper: React.FC = () => {
     const tileGrid = useAppSelector(selectTiles)
+    const dispatch = useAppDispatch()
+
+    const resetGame = () => {
+        dispatch(start())
+    }
 
     return (
         <div
@@ -24,6 +29,9 @@ const Minesweeper: React.FC = () => {
                     boxShadow: "0 0 10px 1px black",
                 }}
             >
+                <button type="button" onClick={resetGame}>
+                    Reset Tiles
+                </button>
                 <div
                     style={{
                         display: "flex",
@@ -32,7 +40,7 @@ const Minesweeper: React.FC = () => {
                         flexDirection: "column"
                     }}
                 >
-                    {tileGrid.map((tiles: boolean[], x) => (
+                    {tileGrid.map((tiles, x) => (
                         <div
                             key={x}
                             style={{
@@ -42,8 +50,7 @@ const Minesweeper: React.FC = () => {
                             {tiles.map((tile, y) => (
                                 <Tile
                                     key={`${x}:${y}`}
-                                    isOpen={tile}
-                                    coordinates={{ x, y }}
+                                    tileData={tile}
                                 />
                             ))}
                         </div>
