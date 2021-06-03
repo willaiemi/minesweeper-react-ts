@@ -29,4 +29,5 @@ export interface GameState {
     baseTiles: ITile[][];
     numberOfHorizontalTiles: number;
     numberOfVerticalTiles: number;
+    bombs: ITile[];
 }

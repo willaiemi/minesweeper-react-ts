@@ -13,7 +13,8 @@ const INITIAL_STATE: GameState = {
     numberOfBombs: 40,
     numberOfHorizontalTiles: 16,
     numberOfVerticalTiles: 16,
-    baseTiles: generateEmptyTileGrid(16, 16)
+    baseTiles: generateEmptyTileGrid(16, 16),
+    bombs: []
 }
 
 export const gameSlice = createSlice({
@@ -26,6 +27,11 @@ export const gameSlice = createSlice({
         closeTile: (state, action: PayloadAction<Coords>) => {
             state.tiles[action.payload.x][action.payload.y].isOpen = false
         },
+        gameOver: (state) => {
+            state.bombs.forEach(({ coordinates: { x, y }}) => {
+                state.tiles[x][y].isOpen = true
+            })
+        },
         start: state => {
             state.numberOfBombs = 40
 
@@ -33,8 +39,9 @@ export const gameSlice = createSlice({
                 .reduce((accumulator, current) => accumulator.concat(current), [])
                 .sort(() => 0.5 - Math.random())
                 .slice(0, state.numberOfBombs)
+                .map(bombTile => ({ ...bombTile }))
 
-            const tiles = [...state.baseTiles]
+            const tiles = [...state.baseTiles].map(tileRow => [...tileRow])
 
             bombs.forEach(bombTile => {
                 const {
@@ -61,12 +68,13 @@ export const gameSlice = createSlice({
                 }
             })
 
+            state.bombs = bombs
             state.tiles = tiles
         }
     }
 })
 
-export const { openTile, closeTile, start } = gameSlice.actions
+export const { openTile, closeTile, gameOver, start } = gameSlice.actions
 
 export const selectTiles = (state: RootState): ITile[][] => state.game.tiles
 

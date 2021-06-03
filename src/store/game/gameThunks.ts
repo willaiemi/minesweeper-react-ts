@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { openTile } from "./gameSlice"
+import { openTile, gameOver } from "./gameSlice"
 import { ITile, TileNature } from "./gameTypes"
 
 import { RootState } from "~/store"
@@ -20,7 +20,7 @@ export const openTileHandler = createAsyncThunk<void, ITile, { state: RootState 
         }
 
         if (tile.nature === TileNature.BOMB) {
-            thunkAPI.dispatch(openTile(tile.coordinates))
+            thunkAPI.dispatch(gameOver())
 
             return
         }
