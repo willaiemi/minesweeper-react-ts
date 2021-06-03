@@ -27,3 +27,24 @@ export const getTilesAroundCoordinates = (coords: Coords, tiles: ITile[][]): ITi
     }
     return tilesAroundCoordinates
 }
+
+export const getRecursiveTilesToOpen = (firstTile: ITile, tiles: ITile[][]): ITile[] => {
+    const tilesCopy = tiles.map(tileList => [...tileList])
+
+    const tilesThatShouldOpen: ITile[] = [firstTile]
+
+    function findTilesNotOpenedAround(tileCoords: Coords) {
+        const tilesNotAlreadyFoundAround = getTilesAroundCoordinates(tileCoords, tilesCopy)
+            .filter(tile => !tilesThatShouldOpen.includes(tile))
+
+        tilesThatShouldOpen.push(...tilesNotAlreadyFoundAround)
+
+        tilesNotAlreadyFoundAround.filter(tile => tile.nature === TileNature.EMPTY).forEach(tile => {
+            findTilesNotOpenedAround(tile.coordinates)
+        })
+    }
+
+    findTilesNotOpenedAround(firstTile.coordinates)
+
+    return tilesThatShouldOpen
+}

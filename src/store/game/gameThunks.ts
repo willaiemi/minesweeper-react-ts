@@ -1,48 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
-import { closeTile, openTile } from "./gameSlice"
-import { Coords, ITile, TileNature } from "./gameTypes"
+import { openTile } from "./gameSlice"
+import { ITile, TileNature } from "./gameTypes"
 
 import { RootState } from "~/store"
-import { getTilesAroundCoordinates } from "~/utils/gameHelpers"
-
-export const openAndCloseTile = createAsyncThunk<void, Coords>(
-    "game/openAndCloseTile",
-    async (coordinates, thunkAPI) => {
-        thunkAPI.dispatch(openTile(coordinates))
-
-        return await new Promise((resolve) => {
-            setTimeout(
-                () => {
-                    thunkAPI.dispatch(closeTile(coordinates))
-                    resolve()
-                },
-                2000
-            )
-        })
-    }
-)
-
-export const getRecursiveTilesToOpen = (firstTile: ITile, tiles: ITile[][]): ITile[] => {
-    const tilesCopy = tiles.map(tileList => [...tileList])
-
-    const tilesThatShouldOpen: ITile[] = [firstTile]
-
-    function findTilesNotOpenedAround(tileCoords: Coords) {
-        const tilesNotAlreadyFoundAround = getTilesAroundCoordinates(tileCoords, tilesCopy)
-            .filter(tile => !tilesThatShouldOpen.includes(tile))
-
-        tilesThatShouldOpen.push(...tilesNotAlreadyFoundAround)
-
-        tilesNotAlreadyFoundAround.filter(tile => tile.nature === TileNature.EMPTY).forEach(tile => {
-            findTilesNotOpenedAround(tile.coordinates)
-        })
-    }
-
-    findTilesNotOpenedAround(firstTile.coordinates)
-
-    return tilesThatShouldOpen
-}
+import { getRecursiveTilesToOpen } from "~/utils/gameHelpers"
 
 export const openTileHandler = createAsyncThunk<void, ITile, { state: RootState }>(
     "game/openTileHandler",
