@@ -6,13 +6,14 @@ import {
 import { Coords, GameState, ITile, TileNature } from "./gameTypes"
 
 import { RootState } from "~/store"
+import { generateEmptyTileGrid, getTilesAroundCoordinates } from "~/utils/gameHelpers"
 
 const INITIAL_STATE: GameState = {
     tiles: [],
     numberOfBombs: 40,
     numberOfHorizontalTiles: 16,
     numberOfVerticalTiles: 16,
-    baseTiles: []
+    baseTiles: generateEmptyTileGrid(16, 16)
 }
 
 export const gameSlice = createSlice({
@@ -28,37 +29,34 @@ export const gameSlice = createSlice({
         start: state => {
             state.numberOfBombs = 40
 
-            const baseTiles = Array.from(Array(16)).map((_, x) => Array.from(Array(16)).map((_, y) => ({
-                isOpen: false,
-                coordinates: { x, y },
-                nature: TileNature.EMPTY,
-            })))
+            const bombs = state.baseTiles
+                .reduce((accumulator, current) => accumulator.concat(current), [])
+                .sort(() => 0.5 - Math.random())
+                .slice(0, state.numberOfBombs)
 
-            const bombs = baseTiles.flat(1).sort(() => 0.5 - Math.random()).slice(0, state.numberOfBombs)
-            const tiles = [...baseTiles]
+            const tiles = [...state.baseTiles]
 
-            bombs.forEach(bombsTile => {
+            bombs.forEach(bombTile => {
                 const {
                     coordinates: coords,
-                } = bombsTile
+                } = bombTile
 
-                const startX = !coords.x ? 0 : coords.x - 1
-                const startY = !coords.y ? 0 : coords.y - 1
-                const endX = coords.x + 1 < state.numberOfHorizontalTiles ? coords.x + 1 : coords.x
-                const endY = coords.y + 1 < state.numberOfVerticalTiles ? coords.y + 1 : coords.y
+                const tilesAroundBomb = getTilesAroundCoordinates(coords, tiles)
 
-                for (let currentX = startX; currentX <= endX; currentX++) {
-                    for (let currentY = startY; currentY <= endY; currentY++) {
-                        const currentTile = tiles[currentX][currentY]
-                        tiles[currentX][currentY] = {
-                            ...currentTile,
-                            nature: currentTile.nature === TileNature.BOMB ? TileNature.BOMB : currentTile.nature + 1,
-                        }
+                tilesAroundBomb.forEach(tile => {
+                    const {
+                        x,
+                        y
+                    } = tile.coordinates
+
+                    tiles[x][y] = {
+                        ...tile,
+                        nature: tile.nature === TileNature.BOMB ? TileNature.BOMB : tile.nature + 1,
                     }
-                }
+                })
 
                 tiles[coords.x][coords.y] = {
-                    ...bombsTile,
+                    ...bombTile,
                     nature: TileNature.BOMB,
                 }
             })
