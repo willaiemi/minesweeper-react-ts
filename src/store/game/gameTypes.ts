@@ -21,6 +21,7 @@ export interface ITile {
     isOpen: boolean;
     nature: TileNature;
     coordinates: Coords;
+    isFlagged: boolean;
 }
 
 export interface GameState {

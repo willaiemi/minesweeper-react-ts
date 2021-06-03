@@ -3,6 +3,7 @@ import { Coords, ITile, TileNature } from "~/store/game/gameTypes"
 export const generateEmptyTileGrid = (horizontalLength: number, verticalLength: number): ITile[][] => (
     Array.from(Array(horizontalLength)).map((_, x) => Array.from(Array(verticalLength)).map((_, y) => ({
         isOpen: false,
+        isFlagged: false,
         coordinates: { x, y },
         nature: TileNature.EMPTY,
     })))

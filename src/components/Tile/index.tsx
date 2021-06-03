@@ -1,7 +1,8 @@
-import React from "react"
+import React, { MouseEvent } from "react"
 
 import { useAppDispatch } from "~/store"
 import { openTileHandler } from "~/store/game/gameThunks"
+import { toggleTileFlag } from "~/store/game/gameSlice"
 import { ITile, TileNature } from "~/store/game/gameTypes"
 
 interface Props {
@@ -33,7 +34,16 @@ const Tile: React.FC<Props> = ({
     const dispatch = useAppDispatch()
 
     const onClickTile = () => {
+        if (tileData.isFlagged || tileData.isOpen) {
+            return
+        }
+
         dispatch(openTileHandler(tileData))
+    }
+
+    const onRightClick = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        dispatch(toggleTileFlag(tileData))
     }
 
     return (
@@ -51,7 +61,9 @@ const Tile: React.FC<Props> = ({
                 transition: "0.4s",
             }}
             onClick={onClickTile}
+            onContextMenu={onRightClick}
         >
+            {tileData.isFlagged && "🚩"}
             {tileData.isOpen && getValueByNature(tileData.nature)}
         </div>
     )

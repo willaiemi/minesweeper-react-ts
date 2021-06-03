@@ -27,13 +27,21 @@ export const gameSlice = createSlice({
         closeTile: (state, action: PayloadAction<Coords>) => {
             state.tiles[action.payload.x][action.payload.y].isOpen = false
         },
+        toggleTileFlag: (state, action: PayloadAction<ITile>) => {
+            const {
+                coordinates,
+                isFlagged,
+            } = action.payload
+
+            state.tiles[coordinates.x][coordinates.y].isFlagged = !isFlagged
+        },
         gameOver: (state) => {
             state.bombs.forEach(({ coordinates: { x, y }}) => {
                 state.tiles[x][y].isOpen = true
             })
         },
         start: state => {
-            state.numberOfBombs = 40
+            state.numberOfBombs = 15
 
             const bombs = state.baseTiles
                 .reduce((accumulator, current) => accumulator.concat(current), [])
@@ -74,8 +82,9 @@ export const gameSlice = createSlice({
     }
 })
 
-export const { openTile, closeTile, gameOver, start } = gameSlice.actions
+export const { openTile, closeTile, gameOver, start, toggleTileFlag } = gameSlice.actions
 
 export const selectTiles = (state: RootState): ITile[][] => state.game.tiles
+export const selectBaseTiles = (state: RootState): ITile[][] => state.game.baseTiles
 
 export default gameSlice.reducer
