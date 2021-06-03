@@ -47,7 +47,7 @@ const Tile: React.FC<Props> = ({
                 alignItems: "center",
                 justifyContent: "center",
                 background: tileData.isOpen ? "white" : "black",
-                cursor: "pointer",
+                cursor: tileData.isOpen ? "default" : "pointer",
                 transition: "0.4s",
             }}
             onClick={onClickTile}

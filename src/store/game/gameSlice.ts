@@ -29,7 +29,7 @@ export const gameSlice = createSlice({
             state.numberOfBombs = 40
 
             const baseTiles = Array.from(Array(16)).map((_, x) => Array.from(Array(16)).map((_, y) => ({
-                isOpen: true,
+                isOpen: false,
                 coordinates: { x, y },
                 nature: TileNature.EMPTY,
             })))
