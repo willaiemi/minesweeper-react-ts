@@ -5,11 +5,13 @@ import { Wallpaper } from "react-windows-xp"
 import MinesweeperWindow from "./components/Minesweeper"
 import { CentralizeWindow } from "./styles"
 import store from "./store"
+import StartupScreen from "./components/StartupScreen"
 
 function App(): JSX.Element {
     return (
         <Provider store={store}>
             <Wallpaper>
+                <StartupScreen></StartupScreen>
                 <CentralizeWindow>
                     <MinesweeperWindow />
                 </CentralizeWindow>
