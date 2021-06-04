@@ -35,6 +35,7 @@ export const StartupContent = styled.div`
 
     & img {
         filter: hue-rotate(109deg);
+        cursor: pointer;
 
         &:hover {
             filter: hue-rotate(109deg) brightness(1.1);
