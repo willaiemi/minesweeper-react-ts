@@ -21,6 +21,7 @@ import deathMine from "~/assets/mine-death.png"
 
 interface Props {
     tileData: ITile,
+    isMouseDown: boolean;
 }
 
 const IMAGE_BY_NATURE = {
@@ -97,10 +98,16 @@ const getImageProps = (tile: ITile) => {
 
 const Tile: React.FC<Props> = ({
     tileData,
+    isMouseDown,
 }) => {
     const dispatch = useAppDispatch()
 
-    const onClickTile = () => {
+    const onMouseUp = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        if (e.button !== 0) {
+            return
+        }
+
         if (tileData.isFlagged || tileData.isOpen) {
             return
         }
@@ -122,7 +129,8 @@ const Tile: React.FC<Props> = ({
     return (
         <StyledTile
             isOpen={tileData.isOpen}
-            onClick={onClickTile}
+            isMouseDown={isMouseDown}
+            onMouseUp={onMouseUp}
             onContextMenu={onRightClick}
         >
             {imageData && (

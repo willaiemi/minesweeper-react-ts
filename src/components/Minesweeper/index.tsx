@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { MouseEvent, useEffect, useState } from "react"
 import { Window } from "react-windows-xp"
 
 import { GameContent } from "./styles"
@@ -11,6 +11,26 @@ import { start } from "~/store/game/gameSlice"
 const MinesweeperWindow: React.FC = () => {
     const dispatch = useAppDispatch()
 
+    const [isMouseDown, setIsMouseDown] = useState(false)
+
+    const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        if (e.button !== 0) {
+            return
+        }
+
+        setIsMouseDown(true)
+    }
+
+    const onMouseUp = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault()
+        if (e.button !== 0) {
+            return
+        }
+
+        setIsMouseDown(false)
+    }
+
     useEffect(
         () => {
             dispatch(start())
@@ -22,9 +42,12 @@ const MinesweeperWindow: React.FC = () => {
         <Window
             title="Minesweeper"
         >
-            <GameContent>
+            <GameContent
+                onMouseDown={onMouseDown}
+                onMouseUp={onMouseUp}
+            >
                 <ScoreBar />
-                <TileGrid />
+                <TileGrid isMouseDown={isMouseDown} />
             </GameContent>
         </Window>
     )
