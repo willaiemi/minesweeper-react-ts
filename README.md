@@ -13,11 +13,11 @@ Run the commands below in your terminal, inside the root folder of this project.
 
 Using Node.js (npm)
 ```sh
-npm i && npm run start
+npm run npm-quickstart
 ```
 Using Yarn
 ```sh
-yarn && yarn start
+yarn yarn-quickstart
 ```
 After this, the project will run on your http://localhost:3000. Enjoy!
 

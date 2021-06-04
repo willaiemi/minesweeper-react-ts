@@ -18,7 +18,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "quickstart": "yarn && react-scripts start",
+    "yarn-quickstart": "yarn && react-scripts start",
+    "npm-quickstart": "npm i && react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
