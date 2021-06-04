@@ -3,7 +3,7 @@ import { json } from "body-parser"
 import { highScoresRouter } from "./routes/highScores"
 
 const app = express()
-app.use(json)
+app.use(json())
 app.use(highScoresRouter)
 
 
