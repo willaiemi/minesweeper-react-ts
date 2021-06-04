@@ -28,8 +28,9 @@ export interface GameState {
     tiles: ITile[][];
     numberOfBombs: number;
     baseTiles: ITile[][];
-    numberOfHorizontalTiles: number;
-    numberOfVerticalTiles: number;
     bombs: ITile[];
     isGameOver: boolean;
+    isGameWon: boolean;
+    isGameRunning: boolean;
+    openedTiles: number;
 }

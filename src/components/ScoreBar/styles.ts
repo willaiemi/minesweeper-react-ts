@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import { styles } from "~/styles"
 
@@ -24,7 +24,11 @@ export const CounterContainer = styled.div`
     height: 23px;
 `
 
-export const RestartButton = styled.div`
+interface RestartButtonProps {
+    isMouseDown: boolean;
+}
+
+export const RestartButton = styled.div<RestartButtonProps>`
     ${styles.winXPElevatedBorderStyle}
     border-width: 2px;
     box-sizing: border-box;
@@ -34,6 +38,15 @@ export const RestartButton = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    ${({ isMouseDown }) => isMouseDown && css`
+        &:hover {
+            border: 1px solid ${styles.colors.MEDIUM_GRAY};
+            border-top-width: 2px;
+            border-left-width: 2px;
+        }
+
+    `}
 
     & > button {
         width: 100%;

@@ -5,17 +5,18 @@ import { GameContent } from "./styles"
 
 import TileGrid from "~/components/TileGrid"
 import ScoreBar from "~/components/ScoreBar"
-import { useAppDispatch } from "~/store"
-import { start } from "~/store/game/gameSlice"
+import { useAppDispatch, useAppSelector } from "~/store"
+import { selectGameSlice, start } from "~/store/game/gameSlice"
 
 const MinesweeperWindow: React.FC = () => {
     const dispatch = useAppDispatch()
+    const { isGameOver, isGameWon } = useAppSelector(selectGameSlice)
 
     const [isMouseDown, setIsMouseDown] = useState(false)
 
     const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
-        if (e.button !== 0) {
+        if (e.button !== 0 || isGameOver || isGameWon) {
             return
         }
 
@@ -46,7 +47,7 @@ const MinesweeperWindow: React.FC = () => {
                 onMouseDown={onMouseDown}
                 onMouseUp={onMouseUp}
             >
-                <ScoreBar />
+                <ScoreBar isMouseDown={isMouseDown} />
                 <TileGrid isMouseDown={isMouseDown} />
             </GameContent>
         </Window>

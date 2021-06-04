@@ -30,18 +30,18 @@ export const getTilesAroundCoordinates = (coords: Coords, tiles: ITile[][]): ITi
 }
 
 export const getRecursiveTilesToOpen = (firstTile: ITile, tiles: ITile[][]): ITile[] => {
-    const tilesCopy = tiles.map(tileList => [...tileList])
-
     const tilesThatShouldOpen: ITile[] = [firstTile]
 
     function findTilesNotOpenedAround(tileCoords: Coords) {
-        const tilesNotAlreadyFoundAround = getTilesAroundCoordinates(tileCoords, tilesCopy)
+        const tilesNotAlreadyFoundAround = getTilesAroundCoordinates(tileCoords, tiles)
             .filter(tile => !tilesThatShouldOpen.includes(tile) && !tile.isFlagged)
 
         tilesThatShouldOpen.push(...tilesNotAlreadyFoundAround)
 
-        tilesNotAlreadyFoundAround.filter(tile => tile.nature === TileNature.EMPTY).forEach(tile => {
-            findTilesNotOpenedAround(tile.coordinates)
+        tilesNotAlreadyFoundAround.forEach(tile => {
+            if (tile.nature === TileNature.EMPTY) {
+                findTilesNotOpenedAround(tile.coordinates)
+            }
         })
     }
 

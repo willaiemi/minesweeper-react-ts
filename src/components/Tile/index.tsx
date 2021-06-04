@@ -117,6 +117,7 @@ const Tile: React.FC<Props> = ({
 
     const onRightClick = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
+
         if (tileData.isOpen) {
             return
         }
