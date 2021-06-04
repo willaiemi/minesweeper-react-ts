@@ -2,9 +2,9 @@ import React, { MouseEvent } from "react"
 
 import { StyledTile } from "./styles"
 
-import { useAppDispatch, useAppSelector } from "~/store"
+import { useAppDispatch } from "~/store"
 import { openTileHandler } from "~/store/game/gameThunks"
-import { selectIsGameOver, toggleTileFlag } from "~/store/game/gameSlice"
+import { toggleTileFlag } from "~/store/game/gameSlice"
 import { ITile, TileNature } from "~/store/game/gameTypes"
 import open1 from "~/assets/open1.png"
 import open2 from "~/assets/open2.png"
@@ -74,8 +74,8 @@ const IMAGE_BY_NATURE = {
     }
 }
 
-const getImageProps = (tile: ITile, isGameOver: boolean) => {
-    if (isGameOver && tile.isOpen && tile.isFlagged) {
+const getImageProps = (tile: ITile) => {
+    if (tile.isOpen && tile.isFlagged) {
         return IMAGE_BY_NATURE.misflagged
     }
 
@@ -99,7 +99,6 @@ const Tile: React.FC<Props> = ({
     tileData,
 }) => {
     const dispatch = useAppDispatch()
-    const isGameOver = useAppSelector(selectIsGameOver)
 
     const onClickTile = () => {
         if (tileData.isFlagged || tileData.isOpen) {
@@ -118,7 +117,7 @@ const Tile: React.FC<Props> = ({
         dispatch(toggleTileFlag(tileData))
     }
 
-    const imageData = getImageProps(tileData, isGameOver)
+    const imageData = getImageProps(tileData)
 
     return (
         <StyledTile
