@@ -1,52 +1,33 @@
-import React from "react"
-import { Wallpaper, Window } from "react-windows-xp"
+import React, { useEffect } from "react"
+import { Window } from "react-windows-xp"
 
-import { CentralizeContent, GameContent, TileGridContainer } from "./styles"
+import { GameContent } from "./styles"
 
-import Tile from "~/components/Tile"
-import { useAppDispatch, useAppSelector } from "~/store"
-import { start, selectTiles } from "~/store/game/gameSlice"
+import TileGrid from "~/components/TileGrid"
+import ScoreBar from "~/components/ScoreBar"
+import { useAppDispatch } from "~/store"
+import { start } from "~/store/game/gameSlice"
 
-const Minesweeper: React.FC = () => {
-    const tileGrid = useAppSelector(selectTiles)
+const MinesweeperWindow: React.FC = () => {
     const dispatch = useAppDispatch()
 
-    const resetGame = () => {
-        dispatch(start())
-    }
+    useEffect(
+        () => {
+            dispatch(start())
+        },
+        [dispatch]
+    )
 
     return (
-        <Wallpaper>
-            <CentralizeContent>
-                <Window
-                    title="Minesweeper"
-                >
-                    <GameContent>
-                        <button type="button" onClick={resetGame}>
-                            Reset Tiles
-                        </button>
-                        <TileGridContainer>
-                            {tileGrid.map((tiles, x) => (
-                                <div
-                                    key={x}
-                                    style={{
-                                        display: "flex",
-                                    }}
-                                >
-                                    {tiles.map((tile, y) => (
-                                        <Tile
-                                            key={`${x}:${y}`}
-                                            tileData={tile}
-                                        />
-                                    ))}
-                                </div>
-                            ))}
-                        </TileGridContainer>
-                    </GameContent>
-                </Window>
-            </CentralizeContent>
-        </Wallpaper>
+        <Window
+            title="Minesweeper"
+        >
+            <GameContent>
+                <ScoreBar />
+                <TileGrid />
+            </GameContent>
+        </Window>
     )
 }
 
-export default Minesweeper
+export default MinesweeperWindow

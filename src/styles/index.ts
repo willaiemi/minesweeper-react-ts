@@ -1,4 +1,4 @@
-import { css } from "styled-components"
+import styled, { css } from "styled-components"
 
 const colors = {
     LIGHT_GRAY: "rgb(245, 245, 245)",
@@ -16,6 +16,14 @@ const winXPElevatedBorderStyle = css`
     border-width: 3px;
     border-style: solid;
     border-color: ${colors.LIGHT_GRAY} ${colors.MEDIUM_GRAY} ${colors.MEDIUM_GRAY} ${colors.LIGHT_GRAY};
+`
+
+export const CentralizeWindow = styled.div`
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const styles = {
