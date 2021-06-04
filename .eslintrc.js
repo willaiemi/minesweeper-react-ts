@@ -111,7 +111,6 @@ module.exports = {
                 project: "./tsconfig.json",
             },
             "babel-plugin-root-import": {
-                rootPathPrefix: "~",
                 rootPathSuffix: "src",
             },
         },

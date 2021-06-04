@@ -1,8 +1,8 @@
 import React, { MouseEvent, useState } from "react"
 
-import { StartupContent, StartupFooter, StartupHeader, StartupScreenContainer } from "./styles"
+import shutdown from "../../assets/shutdown.png"
 
-import shutdown from "~/assets/shutdown.png"
+import { StartupContent, StartupFooter, StartupHeader, StartupScreenContainer } from "./styles"
 
 const windowsXPStartupSound = `${process.env.PUBLIC_URL}/winxp.mp3`
 
