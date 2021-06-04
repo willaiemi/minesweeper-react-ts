@@ -33,4 +33,5 @@ export interface GameState {
     isGameWon: boolean;
     isGameRunning: boolean;
     openedTiles: number;
+    flaggedTiles: number;
 }

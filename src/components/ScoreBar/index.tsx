@@ -1,14 +1,14 @@
 import React, { MouseEvent, useState } from "react"
 
-import { CounterContainer, RestartButton, ScoreBarContainer } from "./styles"
+import { RestartButton, ScoreBarContainer } from "./styles"
 
 import smile from "~/assets/smile.png"
 import ohh from "~/assets/ohh.png"
 import win from "~/assets/win.png"
 import dead from "~/assets/dead.png"
-import digitZero from "~/assets/digit0.png"
 import { start } from "~/store/game/gameSlice"
 import { RootState, useAppDispatch, useAppSelector } from "~/store"
+import Counter from "~/components/Counter"
 
 interface Props {
     isMouseDown: boolean;
@@ -53,6 +53,8 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
         isGameRunning,
         isGameOver,
         isGameWon,
+        numberOfBombs,
+        flaggedTiles,
     } = useAppSelector((state: RootState) => state.game)
     const [isMouseDownOnRestartButton, setIsMouseDownOnRestartButton] = useState(false)
 
@@ -75,11 +77,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
 
     return (
         <ScoreBarContainer>
-            <CounterContainer>
-                <img src={digitZero} />
-                <img src={digitZero} />
-                <img src={digitZero} />
-            </CounterContainer>
+            <Counter number={numberOfBombs - flaggedTiles} />
             <RestartButton
                 isMouseDown={isMouseDownOnRestartButton}
                 onMouseDown={onMouseDownOnRestartButton}
@@ -89,11 +87,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
                     <img {...imageProps} />
                 </button>
             </RestartButton>
-            <CounterContainer>
-                <img src={digitZero} />
-                <img src={digitZero} />
-                <img src={digitZero} />
-            </CounterContainer>
+            <Counter number={0} />
         </ScoreBarContainer>
     )
 }

@@ -14,16 +14,6 @@ export const ScoreBarContainer = styled.div`
     box-sizing: border-box;
 `
 
-export const CounterContainer = styled.div`
-    ${styles.winXPLoweredBorderStyle}
-    border-width: 1px;
-    border-top: none;
-    border-left: none;
-    width: 39px;
-    display: flex;
-    height: 23px;
-`
-
 interface RestartButtonProps {
     isMouseDown: boolean;
 }

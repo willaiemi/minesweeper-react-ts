@@ -17,6 +17,7 @@ const INITIAL_STATE: GameState = {
     isGameRunning: false,
     isGameWon: false,
     openedTiles: 0,
+    flaggedTiles: 0,
 }
 
 export const gameSlice = createSlice({
@@ -48,6 +49,12 @@ export const gameSlice = createSlice({
                 } = action.payload
 
                 state.tiles[coordinates.x][coordinates.y].isFlagged = !isFlagged
+
+                if (isFlagged) {
+                    state.flaggedTiles -= 1
+                } else {
+                    state.flaggedTiles += 1
+                }
             }
 
         },
@@ -69,6 +76,7 @@ export const gameSlice = createSlice({
             state.isGameRunning = false
             state.numberOfBombs = 15
             state.openedTiles = 0
+            state.flaggedTiles = 0
 
             const bombs = state.baseTiles
                 .reduce((accumulator, current) => accumulator.concat(current), [])
