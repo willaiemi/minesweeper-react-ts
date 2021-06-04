@@ -2,6 +2,9 @@
 
 This is an attempt to rebuild the perfect Windowx XP Minesweeper. This project was bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo
+#### Live demo: https://willaiemi.github.io/minesweeper-react-ts/
+
 <p align="center">
     <img src="./demo/minesweeper-demo.gif" alt="animated visual demonstration">
 </p>
