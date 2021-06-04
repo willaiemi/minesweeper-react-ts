@@ -76,7 +76,6 @@ export const gameSlice = createSlice({
             state.isGameOver = false
             state.isGameWon = false
             state.isGameRunning = false
-            state.numberOfBombs = 15
             state.openedTiles = 0
             state.flaggedTiles = 0
 
