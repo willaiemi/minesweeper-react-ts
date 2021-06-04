@@ -1,4 +1,7 @@
 import React from "react"
+import { Wallpaper, Window } from "react-windows-xp"
+
+import { CentralizeContent, GameContent, TileGridContainer } from "./styles"
 
 import Tile from "~/components/Tile"
 import { useAppDispatch, useAppSelector } from "~/store"
@@ -13,51 +16,36 @@ const Minesweeper: React.FC = () => {
     }
 
     return (
-        <div
-            style={{
-                height: "100vh",
-                width: "100vw",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
-            <div
-                style={{
-                    background: "white",
-                    borderRadius: "3px",
-                    boxShadow: "0 0 10px 1px black",
-                }}
-            >
-                <button type="button" onClick={resetGame}>
-                    Reset Tiles
-                </button>
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexDirection: "column"
-                    }}
+        <Wallpaper>
+            <CentralizeContent>
+                <Window
+                    title="Minesweeper"
                 >
-                    {tileGrid.map((tiles, x) => (
-                        <div
-                            key={x}
-                            style={{
-                                display: "flex",
-                            }}
-                        >
-                            {tiles.map((tile, y) => (
-                                <Tile
-                                    key={`${x}:${y}`}
-                                    tileData={tile}
-                                />
+                    <GameContent>
+                        <button type="button" onClick={resetGame}>
+                            Reset Tiles
+                        </button>
+                        <TileGridContainer>
+                            {tileGrid.map((tiles, x) => (
+                                <div
+                                    key={x}
+                                    style={{
+                                        display: "flex",
+                                    }}
+                                >
+                                    {tiles.map((tile, y) => (
+                                        <Tile
+                                            key={`${x}:${y}`}
+                                            tileData={tile}
+                                        />
+                                    ))}
+                                </div>
                             ))}
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
+                        </TileGridContainer>
+                    </GameContent>
+                </Window>
+            </CentralizeContent>
+        </Wallpaper>
     )
 }
 

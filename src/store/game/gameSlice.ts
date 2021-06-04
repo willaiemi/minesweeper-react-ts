@@ -14,7 +14,8 @@ const INITIAL_STATE: GameState = {
     numberOfHorizontalTiles: 16,
     numberOfVerticalTiles: 16,
     baseTiles: generateEmptyTileGrid(16, 16),
-    bombs: []
+    bombs: [],
+    isGameOver: false,
 }
 
 export const gameSlice = createSlice({
@@ -35,10 +36,16 @@ export const gameSlice = createSlice({
 
             state.tiles[coordinates.x][coordinates.y].isFlagged = !isFlagged
         },
-        gameOver: (state) => {
-            state.bombs.forEach(({ coordinates: { x, y }}) => {
-                state.tiles[x][y].isOpen = true
-            })
+        gameOver: (state, { payload: { coordinates }}: PayloadAction<ITile>) => {
+            state.isGameOver = true
+
+            state.tiles[coordinates.x][coordinates.y].isDeathMine = true
+
+            state.tiles.forEach(tileRow => tileRow.forEach(tile => {
+                if (!(tile.nature === TileNature.BOMB) !== !tile.isFlagged) {
+                    tile.isOpen = true
+                }
+            }))
         },
         start: state => {
             state.numberOfBombs = 15
@@ -86,5 +93,6 @@ export const { openTile, closeTile, gameOver, start, toggleTileFlag } = gameSlic
 
 export const selectTiles = (state: RootState): ITile[][] => state.game.tiles
 export const selectBaseTiles = (state: RootState): ITile[][] => state.game.baseTiles
+export const selectIsGameOver = (state: RootState): boolean => state.game.isGameOver
 
 export default gameSlice.reducer

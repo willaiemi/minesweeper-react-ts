@@ -8,7 +8,6 @@ export enum TileNature {
     SIX,
     SEVEN,
     EIGHT,
-    NINE,
     BOMB,
 }
 
@@ -22,6 +21,7 @@ export interface ITile {
     nature: TileNature;
     coordinates: Coords;
     isFlagged: boolean;
+    isDeathMine?: boolean;
 }
 
 export interface GameState {
@@ -31,4 +31,5 @@ export interface GameState {
     numberOfHorizontalTiles: number;
     numberOfVerticalTiles: number;
     bombs: ITile[];
+    isGameOver: boolean;
 }
