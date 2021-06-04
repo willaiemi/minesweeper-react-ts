@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
+import { RootState } from "../index"
+import { getRecursiveTilesToOpen } from "../../utils/gameHelpers"
+
 import { openTile, gameOver } from "./gameSlice"
 import { ITile, TileNature } from "./gameTypes"
-
-import { RootState } from "~/store"
-import { getRecursiveTilesToOpen } from "~/utils/gameHelpers"
 
 export const openTileHandler = createAsyncThunk<void, ITile, { state: RootState }>(
     "game/openTileHandler",

@@ -1,12 +1,12 @@
 import React, { MouseEvent, useEffect, useState } from "react"
 import { Window } from "react-windows-xp"
 
-import { GameContent } from "./styles"
+import TileGrid from "../TileGrid"
+import ScoreBar from "../ScoreBar"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { selectGameSlice, start } from "../../store/game/gameSlice"
 
-import TileGrid from "~/components/TileGrid"
-import ScoreBar from "~/components/ScoreBar"
-import { useAppDispatch, useAppSelector } from "~/store"
-import { selectGameSlice, start } from "~/store/game/gameSlice"
+import { GameContent } from "./styles"
 
 const MinesweeperWindow: React.FC = () => {
     const dispatch = useAppDispatch()

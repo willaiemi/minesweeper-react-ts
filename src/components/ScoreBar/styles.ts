@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-import { styles } from "~/styles"
+import { styles } from "../../styles"
 
 export const ScoreBarContainer = styled.div`
     ${styles.winXPLoweredBorderStyle}

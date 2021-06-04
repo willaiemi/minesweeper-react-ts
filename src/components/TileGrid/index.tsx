@@ -1,10 +1,10 @@
 import React from "react"
 
-import { TileGridContainer } from "./styles"
+import Tile from "../Tile"
+import { useAppSelector } from "../../store"
+import { selectTiles } from "../../store/game/gameSlice"
 
-import Tile from "~/components/Tile"
-import { useAppSelector } from "~/store"
-import { selectTiles } from "~/store/game/gameSlice"
+import { TileGridContainer } from "./styles"
 
 interface Props {
     isMouseDown: boolean;

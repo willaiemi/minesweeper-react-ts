@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
-import { useAppSelector } from "~/store"
-import { selectGameSlice } from "~/store/game/gameSlice"
+import { useAppSelector } from "../store"
+import { selectGameSlice } from "../store/game/gameSlice"
 
 const useTimer = (): number => {
     const [time, setTime] = useState(0)

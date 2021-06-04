@@ -109,10 +109,7 @@ module.exports = {
         "import/resolver": {
             typescript: {
                 project: "./tsconfig.json",
-            },
-            "babel-plugin-root-import": {
-                rootPathSuffix: "src",
-            },
+            }
         },
         "react": {
             "version": "detect",

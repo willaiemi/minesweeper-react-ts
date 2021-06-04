@@ -1,16 +1,15 @@
 import React, { MouseEvent, useState } from "react"
 
+import smile from "../../assets/smile.png"
+import ohh from "../../assets/ohh.png"
+import win from "../../assets/win.png"
+import dead from "../../assets/dead.png"
+import { start } from "../../store/game/gameSlice"
+import { RootState, useAppDispatch, useAppSelector } from "../../store"
+import Counter from "../Counter"
+import useTimer from "../../hooks/useTimer"
+
 import { RestartButton, ScoreBarContainer } from "./styles"
-
-import smile from "~/assets/smile.png"
-import ohh from "~/assets/ohh.png"
-import win from "~/assets/win.png"
-import dead from "~/assets/dead.png"
-import { start } from "~/store/game/gameSlice"
-import { RootState, useAppDispatch, useAppSelector } from "~/store"
-import Counter from "~/components/Counter"
-import useTimer from "~/hooks/useTimer"
-
 interface Props {
     isMouseDown: boolean;
 }

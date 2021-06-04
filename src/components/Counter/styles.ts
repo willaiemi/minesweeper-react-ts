@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { styles } from "~/styles"
+import { styles } from "../../styles"
 
 export const CounterContainer = styled.div`
     ${styles.winXPLoweredBorderStyle}

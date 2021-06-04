@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 
-import { styles } from "~/styles"
+import { styles } from "../../styles"
 
 interface StyledTileProps {
     isOpen: boolean;

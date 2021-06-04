@@ -3,10 +3,10 @@ import {
     PayloadAction
 } from "@reduxjs/toolkit"
 
-import { Coords, GameState, ITile, TileNature } from "./gameTypes"
+import { RootState } from "../index"
+import { generateEmptyTileGrid, getTilesAroundCoordinates } from "../../utils/gameHelpers"
 
-import { RootState } from "~/store"
-import { generateEmptyTileGrid, getTilesAroundCoordinates } from "~/utils/gameHelpers"
+import { Coords, GameState, ITile, TileNature } from "./gameTypes"
 
 const INITIAL_STATE: GameState = {
     tiles: [],

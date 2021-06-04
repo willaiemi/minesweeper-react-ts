@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-import { styles } from "~/styles"
+import { styles } from "../../styles"
 
 export const TileGridContainer = styled.div`
     ${styles.winXPLoweredBorderStyle}
