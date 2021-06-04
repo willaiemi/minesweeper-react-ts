@@ -16,9 +16,9 @@ export const StartupScreenContainer = styled.div<StartupScreenContainerProps>`
     `}
 `
 
-export const StartupHeader = styled.div`
+export const StartupBlueStripe = styled.div`
     background: rgb(9, 33, 120);
-    height: 13%;
+    height: 14%;
     width: 100%;
 `
 
@@ -78,10 +78,4 @@ export const StartupContent = styled.div`
         background: linear-gradient(to right, transparent 0px, rgba(220, 152, 117) 40%,
             rgba(220, 152, 117) 60%, transparent 100%)
     }
-`
-
-export const StartupFooter = styled.div`
-    background: rgb(9, 33, 120);
-    height: 15%;
-    width: 100%;
 `

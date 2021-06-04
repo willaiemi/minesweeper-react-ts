@@ -2,7 +2,7 @@ import React, { MouseEvent, useState } from "react"
 
 import shutdown from "../../assets/shutdown.png"
 
-import { StartupContent, StartupFooter, StartupHeader, StartupScreenContainer } from "./styles"
+import { StartupContent, StartupBlueStripe, StartupScreenContainer } from "./styles"
 
 const windowsXPStartupSound = `${process.env.PUBLIC_URL}/winxp.mp3`
 
@@ -27,14 +27,12 @@ const StartupScreen: React.FC = () => {
     if (showStartupScreen) {
         return (
             <StartupScreenContainer fadeOut={fadeOut}>
-                <StartupHeader>
-                </StartupHeader>
+                <StartupBlueStripe />
                 <StartupContent>
                     <img onClick={startWindowsXP} src={shutdown} alt="shutdown" />
                     <p>Turn on</p>
                 </StartupContent>
-                <StartupFooter>
-                </StartupFooter>
+                <StartupBlueStripe />
             </StartupScreenContainer>
         )
     }

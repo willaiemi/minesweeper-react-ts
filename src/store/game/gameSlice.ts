@@ -73,12 +73,6 @@ export const gameSlice = createSlice({
             }))
         },
         start: state => {
-            state.isGameOver = false
-            state.isGameWon = false
-            state.isGameRunning = false
-            state.openedTiles = 0
-            state.flaggedTiles = 0
-
             const bombs = state.baseTiles
                 .reduce((accumulator, current) => accumulator.concat(current), [])
                 .sort(() => 0.5 - Math.random())
@@ -112,8 +106,11 @@ export const gameSlice = createSlice({
                 }
             })
 
-            state.bombs = bombs
-            state.tiles = tiles
+            return {
+                ...INITIAL_STATE,
+                bombs,
+                tiles,
+            }
         }
     }
 })

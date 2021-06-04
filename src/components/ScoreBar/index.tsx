@@ -1,50 +1,15 @@
 import React, { MouseEvent, useState } from "react"
 
-import smile from "../../assets/smile.png"
-import ohh from "../../assets/ohh.png"
-import win from "../../assets/win.png"
-import dead from "../../assets/dead.png"
 import { start } from "../../store/game/gameSlice"
 import { RootState, useAppDispatch, useAppSelector } from "../../store"
 import Counter from "../Counter"
 import useTimer from "../../hooks/useTimer"
+import { getRestartButtonImageProps } from "../../utils/imageHelpers"
 
 import { RestartButton, ScoreBarContainer } from "./styles"
+
 interface Props {
     isMouseDown: boolean;
-}
-
-const getImageProps = (
-    isGameRunning: boolean,
-    isGameOver: boolean,
-    isGameWon: boolean,
-    isMouseDown: boolean,
-) => {
-    if (isGameRunning && isMouseDown) {
-        return {
-            src: ohh,
-            alt: "ohh"
-        }
-    }
-
-    if (isGameOver) {
-        return {
-            src: dead,
-            alt: "dead"
-        }
-    }
-
-    if (isGameWon) {
-        return {
-            src: win,
-            alt: "win"
-        }
-    }
-
-    return {
-        src: smile,
-        alt: "smile"
-    }
 }
 
 const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
@@ -74,7 +39,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
         setIsMouseDownOnRestartButton(false)
     }
 
-    const imageProps = getImageProps(isGameRunning, isGameOver, isGameWon, isMouseDown)
+    const imageProps = getRestartButtonImageProps(isGameRunning, isGameOver, isGameWon, isMouseDown)
 
     return (
         <ScoreBarContainer>
