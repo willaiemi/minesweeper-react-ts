@@ -9,6 +9,7 @@ import dead from "~/assets/dead.png"
 import { start } from "~/store/game/gameSlice"
 import { RootState, useAppDispatch, useAppSelector } from "~/store"
 import Counter from "~/components/Counter"
+import useTimer from "~/hooks/useTimer"
 
 interface Props {
     isMouseDown: boolean;
@@ -57,6 +58,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
         flaggedTiles,
     } = useAppSelector((state: RootState) => state.game)
     const [isMouseDownOnRestartButton, setIsMouseDownOnRestartButton] = useState(false)
+    const time = useTimer()
 
     const resetGame = () => {
         dispatch(start())
@@ -69,7 +71,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
         setIsMouseDownOnRestartButton(true)
     }
 
-    const onMouseLeave = () => {
+    const onMouseLeaveOrGoUp = () => {
         setIsMouseDownOnRestartButton(false)
     }
 
@@ -81,13 +83,14 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
             <RestartButton
                 isMouseDown={isMouseDownOnRestartButton}
                 onMouseDown={onMouseDownOnRestartButton}
-                onMouseLeave={onMouseLeave}
+                onMouseLeave={onMouseLeaveOrGoUp}
+                onMouseUp={onMouseLeaveOrGoUp}
             >
                 <button type="button" onClick={resetGame}>
                     <img {...imageProps} />
                 </button>
             </RestartButton>
-            <Counter number={0} />
+            <Counter number={time} />
         </ScoreBarContainer>
     )
 }

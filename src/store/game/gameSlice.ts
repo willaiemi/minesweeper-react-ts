@@ -38,6 +38,8 @@ export const gameSlice = createSlice({
                     state.bombs.forEach(({ coordinates }) => {
                         state.tiles[coordinates.x][coordinates.y].isFlagged = true
                     })
+
+                    state.flaggedTiles = state.numberOfBombs
                 }
             }
         },
