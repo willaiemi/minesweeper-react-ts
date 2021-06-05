@@ -54,7 +54,7 @@ const IMAGE_BY_NATURE = {
         src: open8,
         alt: "eight"
     },
-    [TileNature.BOMB]: {
+    [TileNature.MINE]: {
         src: mine,
         alt: "mine"
     },
@@ -66,7 +66,7 @@ const IMAGE_BY_NATURE = {
         src: misflagged,
         alt: "misflagged"
     },
-    deathBomb: {
+    deathMine: {
         src: deathMine,
         alt: "death mine"
     }
@@ -86,7 +86,7 @@ export const getTileImageProps = (tile: ITile): ImageProps | null => {
     }
 
     if (tile.isDeathMine) {
-        return IMAGE_BY_NATURE.deathBomb
+        return IMAGE_BY_NATURE.deathMine
     }
 
     return IMAGE_BY_NATURE[tile.nature]

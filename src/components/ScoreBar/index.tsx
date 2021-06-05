@@ -18,7 +18,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
         isGameRunning,
         isGameOver,
         isGameWon,
-        numberOfBombs,
+        numberOfMines,
         flaggedTiles,
     } = useAppSelector((state: RootState) => state.game)
     const [isMouseDownOnRestartButton, setIsMouseDownOnRestartButton] = useState(false)
@@ -43,7 +43,7 @@ const ScoreBar: React.FC<Props> = ({ isMouseDown }) => {
 
     return (
         <ScoreBarContainer>
-            <Counter number={numberOfBombs - flaggedTiles} />
+            <Counter number={numberOfMines - flaggedTiles} />
             <RestartButton
                 isMouseDown={isMouseDownOnRestartButton}
                 onMouseDown={onMouseDownOnRestartButton}

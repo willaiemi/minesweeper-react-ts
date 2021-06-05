@@ -8,7 +8,7 @@ export enum TileNature {
     SIX,
     SEVEN,
     EIGHT,
-    BOMB,
+    MINE,
 }
 
 export interface Coords {
@@ -26,9 +26,9 @@ export interface ITile {
 
 export interface GameState {
     tiles: ITile[][];
-    numberOfBombs: number;
+    numberOfMines: number;
     baseTiles: ITile[][];
-    bombs: ITile[];
+    mines: ITile[];
     isGameOver: boolean;
     isGameWon: boolean;
     isGameRunning: boolean;

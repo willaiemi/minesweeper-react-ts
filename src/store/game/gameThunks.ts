@@ -19,7 +19,7 @@ export const openTileHandler = createAsyncThunk<void, ITile, { state: RootState 
             return
         }
 
-        if (tile.nature === TileNature.BOMB) {
+        if (tile.nature === TileNature.MINE) {
             thunkAPI.dispatch(gameOver(tile))
             return
         }

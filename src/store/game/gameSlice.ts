@@ -10,9 +10,9 @@ import { Coords, GameState, ITile, TileNature } from "./gameTypes"
 
 const INITIAL_STATE: GameState = {
     tiles: [],
-    numberOfBombs: 40,
+    numberOfMines: 40,
     baseTiles: generateEmptyTileGrid(16, 16),
-    bombs: [],
+    mines: [],
     isGameOver: false,
     isGameRunning: false,
     isGameWon: false,
@@ -31,15 +31,15 @@ export const gameSlice = createSlice({
                 tile.isOpen = true
                 state.openedTiles += 1
 
-                if (state.openedTiles >= (state.tiles[0].length * state.tiles.length) - state.numberOfBombs) {
+                if (state.openedTiles >= (state.tiles[0].length * state.tiles.length) - state.numberOfMines) {
                     state.isGameRunning = false
                     state.isGameWon = true
 
-                    state.bombs.forEach(({ coordinates }) => {
+                    state.mines.forEach(({ coordinates }) => {
                         state.tiles[coordinates.x][coordinates.y].isFlagged = true
                     })
 
-                    state.flaggedTiles = state.numberOfBombs
+                    state.flaggedTiles = state.numberOfMines
                 }
             }
         },
@@ -67,7 +67,7 @@ export const gameSlice = createSlice({
             state.tiles[coordinates.x][coordinates.y].isDeathMine = true
 
             state.tiles.forEach(tileRow => tileRow.forEach(tile => {
-                if (!(tile.nature === TileNature.BOMB) !== !tile.isFlagged) {
+                if (!(tile.nature === TileNature.MINE) !== !tile.isFlagged) {
                     tile.isOpen = true
                 }
             }))
@@ -76,28 +76,28 @@ export const gameSlice = createSlice({
             const baseTilesFlat = state.baseTiles
                 .reduce((accumulator, current) => accumulator.concat(current), [])
 
-            const bombs: ITile[] = []
+            const mines: ITile[] = []
 
-            while (bombs.length !== state.numberOfBombs) {
+            while (mines.length !== state.numberOfMines) {
                 const randomNumber = Math.floor(Math.random() * (baseTilesFlat.length - 1))
 
-                const [bomb] = baseTilesFlat.splice(randomNumber, 1)
+                const [mine] = baseTilesFlat.splice(randomNumber, 1)
 
-                bombs.push({
-                    ...bomb
+                mines.push({
+                    ...mine
                 })
             }
 
             const tiles = [...state.baseTiles].map(tileRow => [...tileRow])
 
-            bombs.forEach(bombTile => {
+            mines.forEach(mineTile => {
                 const {
                     coordinates: coords,
-                } = bombTile
+                } = mineTile
 
-                const tilesAroundBomb = getTilesAroundCoordinates(coords, tiles)
+                const tilesAroundMine = getTilesAroundCoordinates(coords, tiles)
 
-                tilesAroundBomb.forEach(tile => {
+                tilesAroundMine.forEach(tile => {
                     const {
                         x,
                         y
@@ -105,19 +105,19 @@ export const gameSlice = createSlice({
 
                     tiles[x][y] = {
                         ...tile,
-                        nature: tile.nature === TileNature.BOMB ? TileNature.BOMB : tile.nature + 1,
+                        nature: tile.nature === TileNature.MINE ? TileNature.MINE : tile.nature + 1,
                     }
                 })
 
                 tiles[coords.x][coords.y] = {
-                    ...bombTile,
-                    nature: TileNature.BOMB,
+                    ...mineTile,
+                    nature: TileNature.MINE,
                 }
             })
 
             return {
                 ...INITIAL_STATE,
-                bombs,
+                mines,
                 tiles,
             }
         }
