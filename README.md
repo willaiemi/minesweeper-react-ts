@@ -26,6 +26,15 @@ yarn yarn-quickstart
 ```
 After this, the project will run on your http://localhost:3000. Enjoy!
 
+## Roadmap
+There are a lot of features I still want to implement. I will be updating this list as I implement them.
+- [ ] REST API to record High Scores;
+- [ ] Unit tests;
+- [ ] Window drag & drop;
+- [ ] Close window button and "Desktop Icon" to open the game;
+- [ ] Add information about the author;
+- [ ] Shutdown button.
+
 ## Authors
 ### Willian Duarte
 You can find more about me in my social media below.
