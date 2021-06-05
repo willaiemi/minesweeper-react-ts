@@ -73,11 +73,20 @@ export const gameSlice = createSlice({
             }))
         },
         start: state => {
-            const bombs = state.baseTiles
+            const baseTilesFlat = state.baseTiles
                 .reduce((accumulator, current) => accumulator.concat(current), [])
-                .sort(() => 0.5 - Math.random())
-                .slice(0, state.numberOfBombs)
-                .map(bombTile => ({ ...bombTile }))
+
+            const bombs: ITile[] = []
+
+            while (bombs.length !== state.numberOfBombs) {
+                const randomNumber = Math.floor(Math.random() * (baseTilesFlat.length - 1))
+
+                const [bomb] = baseTilesFlat.splice(randomNumber, 1)
+
+                bombs.push({
+                    ...bomb
+                })
+            }
 
             const tiles = [...state.baseTiles].map(tileRow => [...tileRow])
 
